@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 
 function App() {
     const [review, setReview] = useState('');
     const [sentiment, setSentiment] = useState('');
     // const modelServiceUrl = 'http://localhost:5000';
-    const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
+    // const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
 
     const performSentimentAnalysis = async () => {
       try {

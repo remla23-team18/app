@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-// REACT_APP_MODEL_SERVICE_URL = 'http://localhost:5000';
-
 function App() {
     const [review, setReview] = useState('');
     const [sentiment, setSentiment] = useState('');
-    const modelServiceUrl = 'http://localhost:5000';
-    // const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
+    // const modelServiceUrl = 'http://localhost:5000';
+    const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
 
     const performSentimentAnalysis = async () => {
       try {
-        // const response = await axios.post(`${modelServiceUrl}/sentiment-analysis`, { review: review });
+        // const response = await axios.post(`${modelServiceUrl}`, { review: review });
         // setSentiment(response.data.sentiment);
 
         // Experiment with dummy data.

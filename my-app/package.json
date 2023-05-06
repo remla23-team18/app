@@ -4,6 +4,7 @@
   "homepage": "https://remla23-team18.github.io/app/",
   "private": true,
   "dependencies": {
+    "@remla23-team18/lib": "^1.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",

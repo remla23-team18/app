@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 
 function App() {
     const [review, setReview] = useState('');
     const [sentiment, setSentiment] = useState('');
-    // const modelServiceUrl = 'http://localhost:5000';
-    // const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
+    const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
 
     const performSentimentAnalysis = async () => {
       try {
-        // const response = await axios.post(`${modelServiceUrl}`, { review: review });
-        // setSentiment(response.data.sentiment);
+        const response = await axios.post(`${modelServiceUrl}`, { msg: review });
+        console.log(response)
+        setSentiment(response.data.sentiment);
 
-        // Experiment with dummy data.
-        const sentiment = review.includes('good') ? 'positive' : 'negative';
-        setSentiment(sentiment);
+        // // Experiment with dummy data.
+        // const sentiment = review.includes('good') ? 'positive' : 'negative';
+        // setSentiment(sentiment);
 
       } catch (error) {
         console.error(error);
@@ -80,12 +80,12 @@ function App() {
           Analyze
         </button>
         <br />
-        {sentiment === 'positive' ? (
+        {sentiment === 1 ? (
           <span role="img" aria-label="Happy" style={{ fontSize: '3rem' }}>
             😄
           </span>
         ) : null}
-        {sentiment === 'negative' ? (
+        {sentiment === 0 ? (
           <span role="img" aria-label="Sad" style={{ fontSize: '3rem' }}>
             😞
           </span>

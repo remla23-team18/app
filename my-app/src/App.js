@@ -3,6 +3,7 @@ import axios from 'axios';
 import { VersionUtil } from '@remla23-team18/lib'
 
 function App() {
+
     const libVersion = new VersionUtil().getVersion();
     console.log(`Library version: ${libVersion}`);
 

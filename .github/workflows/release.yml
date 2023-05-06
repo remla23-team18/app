@@ -14,12 +14,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Authenticate to GitHub Package Registry
+        run: echo "//npm.pkg.github.com/:_authToken=${GH_TOKEN}" >> ~/.npmrc
+
       - name: Install dependencies
         working-directory: my-app
         run: npm install
-
-      - name: Authenticate to GitHub Package Registry
-        run: echo "//npm.pkg.github.com/:_authToken=${GH_TOKEN}" >> ~/.npmrc
 
       - name: Build app
         working-directory: my-app

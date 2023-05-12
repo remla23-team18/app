@@ -12,7 +12,7 @@ function App() {
 
     const performSentimentAnalysis = async () => {
       try {
-        const response = await axios.post(`${modelServiceUrl}`, { msg: review });
+        const response = await axios.post(`${modelServiceUrl}/predict`, { msg: review });
         console.log(response)
         setSentiment(response.data.sentiment);
 

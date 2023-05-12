@@ -13,6 +13,10 @@ ENV GH_TOKEN=${GH_TOKEN}
 RUN npm config set @remla23-team18:registry https://npm.pkg.github.com
 RUN echo "//npm.pkg.github.com/:_authToken=\${GH_TOKEN}" >> ~/.npmrc
 
+ARG REACT_APP_MODEL_SERVICE_URL
+ENV REACT_APP_MODEL_SERVICE_URL=${REACT_APP_MODEL_SERVICE_URL}
+
+
 # Install dependencies
 RUN npm install
 

@@ -1,24 +1,19 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import { VersionUtil } from '@remla23-team18/lib'
+import { SentimentAnalyzer } from '@remla23-team18/lib'
 
 function App() {
-    const libVersion = new VersionUtil().getVersion();
+    const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
+    const sentimentAnalyzer = new SentimentAnalyzer(modelServiceUrl);
+    const libVersion = sentimentAnalyzer.getVersion();
     console.log(`Library version: ${libVersion}`);
 
     const [review, setReview] = useState('');
     const [sentiment, setSentiment] = useState('');
-    const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
 
     const performSentimentAnalysis = async () => {
       try {
-        const response = await axios.post(`${modelServiceUrl}/predict`, { msg: review });
-        console.log(response)
-        setSentiment(response.data.sentiment);
-
-        // // Experiment with dummy data.
-        // const sentiment = review.includes('good') ? 'positive' : 'negative';
-        // setSentiment(sentiment);
+        const sentiment = await sentimentAnalyzer.analyzeSentiment(review);
+        setSentiment(sentiment);
 
       } catch (error) {
         console.error(error);

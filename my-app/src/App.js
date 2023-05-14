@@ -8,22 +8,37 @@ function App() {
 
     const [review, setReview] = useState('');
     const [sentiment, setSentiment] = useState('');
+    const [feedback, setFeedback] = useState('');
+    const [showFeedback, setShowFeedback] = useState(false);
+
     const modelServiceUrl = process.env.REACT_APP_MODEL_SERVICE_URL;
+    // const modelServiceUrl = 'http://localhost:8080'
 
     const performSentimentAnalysis = async () => {
       try {
         const response = await axios.post(`${modelServiceUrl}/predict`, { msg: review });
         console.log(response)
         setSentiment(response.data.sentiment);
-
-        // // Experiment with dummy data.
-        // const sentiment = review.includes('good') ? 'positive' : 'negative';
-        // setSentiment(sentiment);
-
+        setShowFeedback(true);
       } catch (error) {
         console.error(error);
       }
     };
+
+  const submitFeedback = async () => {
+    try {
+      const response = await axios.post(`${modelServiceUrl}/feedback`, {
+        feedback: feedback ? 1 : 0,
+      });
+        setFeedback('');
+        setSentiment('');
+        setShowFeedback(false); // Hide the feedback options
+        console.log(response.data);
+        console.log('Feedback submitted successfully.');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div
@@ -83,6 +98,31 @@ function App() {
         >
           Analyze
         </button>
+          {showFeedback && (
+              <>
+                  <label style={{ display: 'flex', flexDirection: 'row', marginRight: '8px' }}>
+                    <input
+                      type="checkbox"
+                      checked={feedback}
+                      onChange={(e) => setFeedback(e.target.checked)}
+                      style={{ marginLeft: '4px' }}
+                    />
+                    Correct
+                  </label>
+                  <label style={{ display: 'flex', flexDirection: 'row' }}>
+                    <input
+                      type="checkbox"
+                      checked={!feedback}
+                      onChange={(e) => setFeedback(!e.target.checked)}
+                      style={{ marginLeft: '4px' }}
+                    />
+                    Incorrect
+                  </label>
+                  <button onClick={submitFeedback}>Submit Feedback</button>
+
+              </>
+            )}
+
         <br />
         {sentiment === 1 ? (
           <span role="img" aria-label="Happy" style={{ fontSize: '3rem' }}>

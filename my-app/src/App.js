@@ -46,7 +46,7 @@ function App() {
         fontFamily: 'Arial, sans-serif',
         fontSize: '16px',
         color: '#333',
-        backgroundImage: 'url("restaurant-background.jpg")',
+        // backgroundImage: 'url("restaurant-background.jpg")',
         backgroundSize: 'cover',
       }}
     >
